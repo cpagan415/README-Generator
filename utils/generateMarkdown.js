@@ -18,6 +18,27 @@ function generateMarkdown(data) {
   console.log(data);
   return `# ${data.title}
 
+  ##Description
+  ${data.description}
+
+  ##Installation
+  ${data.installation}
+
+  ##Usage
+  ${data.usage}
+
+  ##Credits
+
+  ##License
+
+  ##Badges
+
+  ##Features
+  ${data.features}
+
+  ##Contributors
+  ${data.contributing}
+
 `;
 }
 
