@@ -1,14 +1,16 @@
 // TODO: Include packages needed for this application
-// package.json has inquirer so I will use that 
+// using inquirer as requested by challenge 
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 // TODO: Create an array of questions for user input
+
 const questions = [
+    /*
     {
         name: 'title',
         type: 'input',
-        message: 'What is the name of your project?'
+        message: 'What is the title of your project?'
     },
     {
         name: 'description',
@@ -18,36 +20,58 @@ const questions = [
     {
         name: 'installation',
         type: 'input',
-        message: 'Give step by step instruction on how to get your program running:'
+        message: 'Give step by step instructions on how to get your program running:'
     },
     {
         name: 'usage',
         type: 'input',
-        message: 'Provide instructions and screenshot for your project:'
+        message: 'Provide instructions for for use:'
     },
     {
-        name: 'credits',
-        type: 'input',
-        //this may change later on
-        message: 'Is this project affiliated with a license?'
-    },
-    {
-        name: 'badges',
+        name: 'appScreenshot',
         type: 'confirm',
-        message: 'Would you like to include badges?'
+        message: 'Would you like to include screenshots for you application?'
     },
+    //placing a conditional to add screenshot
     {
-        name: 'features',
-        //this may change later on
+        name: 'appPhoto',
         type: 'input',
-        message: 'Please descrive the features of the project:'
+        message:'Please place the path for your photo here: ',
+        when:({ appScreenshot }) => 
+        {
+            if(appScreenshot)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    },*/
+    {
+        name: 'creditConfirm',
+        type: 'confirm',
+        message: 'Are there any collaborators with this project?'
     },
     {
-        name: 'contributing',
-        type: 'confirm',
-        message: 'Is it ok to contribute to this project?'
+        name: 'credit',
+        type: 'input',
+        message: 'Please enter github usernames affiliated with the project here:',
+        when:({ creditConfirm }) =>
+        {
+           if(creditConfirm)
+           {
+               return true;
+           }
+           else
+           {
+            return false;
+           }
+        }
     }
+  
 ];
+
 
 
 // TODO: Create a function to write README file
