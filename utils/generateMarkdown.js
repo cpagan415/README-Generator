@@ -1,5 +1,6 @@
 
 module.exports = generateMarkdown;
+//Added more functions below to only make sections appear if user wants the section placed 
 
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
@@ -52,16 +53,33 @@ function renderLicenseSection(license)
   }
 }
 
+//turned inquirer credit and tutorial input for user into an array
+function creditTitle(credit)
+{
+  if(credit){  return '## Credits<br>'}
+  else { return ' '}
+}
+function gitUsers(gitName)
+{
+  if(gitName){
+  gitName=gitName.split(' ');
+  gitName=gitName.map(users => `[${users}](https://github.com/${users})<br>`);
+  gitName.join(' ');
+  return gitName;
+  }
+  else
+  {
+    return ' ';
+  }
+}
+
+function tutorials(tutorialName, tutorialLinks)
+{
+ 
+}
 // TODO: Create a function to generate markdown for README
 //figuring out how to add an image to Usage
 function generateMarkdown(data) {
-  //turned inquirer credit and tutorial input for user into an array
-  //let users = data.credit.split(' ');
-  //let tutorial = data.tutorial.split(' ');
-  //not sure how to place github user names on a new line
-  //users= users.map(gitName => `[${gitName}](https://github.com/${gitName})`);
-  //tutorial = tutorial.map(links => `[${links}](links)`);
-  //printing out data for my reference
 
   return `# ${data.title}
 
@@ -75,8 +93,8 @@ function generateMarkdown(data) {
   ![alt text](${data.appPhoto})
   ${data.usage}
 
-  ## Credits
-  user variable here
+  ${creditTitle(data.credit)}
+  ${gitUsers(data.credit)}
 
   ${renderLicenseSection(data.license)}
   ${renderLicenseBadge(data.license)}${renderLicenseLink(data.license)}

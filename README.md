@@ -10,11 +10,8 @@
   ![alt text](undefined)
   undefined
 
-  ## Credits
-  user variable here
-
-   
-    
+  ## License
+  [![license](https://img.shields.io/badge/license-MIT-blue)](https://www.mit.edu/~amini/LICENSE.md)
   
 
   ## Badges

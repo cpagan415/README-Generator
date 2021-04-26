@@ -47,7 +47,7 @@ const questions = [
                 return false;
             }
         }
-    },
+    },*/
     {
         name: 'creditConfirm',
         type: 'confirm',
@@ -68,7 +68,7 @@ const questions = [
             return false;
            }
         }
-    },
+    },/*
     {
         name: 'tutorialConfirm',
         type: 'confirm',
