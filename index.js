@@ -5,27 +5,42 @@ const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 // TODO: Create an array of questions for user input
 
+
+const validateInput = async(input) =>
+        {
+            if(input === '')
+            {
+                console.log('This is required');
+            }
+            else{
+            return true;
+            }
+        }
+
 const questions = [
-    /*
     {
         name: 'title',
         type: 'input',
-        message: 'What is the title of your project?'
+        message: 'What is the title of your project? (required)',
+        validate: validateInput
     },
     {
         name: 'description',
         type: 'input',
-        message: 'Please provide a brief description of the project:'
+        message: 'Please provide a brief description of the project:(required)',
+        validate: validateInput
     },
     {
         name: 'installation',
         type: 'input',
-        message: 'Give step by step instructions on how to get your program running:'
+        message: 'Give step by step instructions on how to get your program running:(required)',
+        validate: validateInput
     },
     {
         name: 'usage',
         type: 'input',
-        message: 'Provide instructions for for use:'
+        message: 'Provide instructions for for use:(required)',
+        validate: validateInput
     },
     {
         name: 'appScreenshot',
@@ -47,7 +62,7 @@ const questions = [
                 return false;
             }
         }
-    },*/
+    },
     {
         name: 'creditConfirm',
         type: 'confirm',
@@ -68,12 +83,12 @@ const questions = [
             return false;
            }
         }
-    },/*
+    },
     {
         name: 'tutorialConfirm',
         type: 'confirm',
         message: 'Did you follow any tutorials?'
-    },
+    },/*
     {
         name: 'tutorial',
         type: 'input',
