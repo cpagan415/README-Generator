@@ -1,23 +1,25 @@
 # undefined
 
-  ##Description
+  ## Description
   undefined
 
-  ##Installation
+  ## Installation
   undefined
 
-  ##Usage
+  ## Usage
   ![alt text](undefined)
   undefined
 
-  ##Credits
-  [cpagan415](https://github.com/cpagan415),[ChristianFlows](https://github.com/ChristianFlows),[InaWise](https://github.com/InaWise)<br />
+  ## Credits
+  user variable here
 
-  ##License
+   
+    
+  
 
-  ##Badges
+  ## Badges
 
-  ##Features
+  ## Features
 
-  ##Contributors
+  ## Contributors
  

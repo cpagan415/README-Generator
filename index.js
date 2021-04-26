@@ -1,5 +1,5 @@
 // TODO: Include packages needed for this application
-// using inquirer as requested by challenge 
+// using inquirer as requested by challenge, added fs so info gets transferred to README
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
@@ -47,7 +47,7 @@ const questions = [
                 return false;
             }
         }
-    },*/
+    },
     {
         name: 'creditConfirm',
         type: 'confirm',
@@ -68,15 +68,39 @@ const questions = [
             return false;
            }
         }
+    },
+    {
+        name: 'tutorialConfirm',
+        type: 'confirm',
+        message: 'Did you follow any tutorials?'
+    },
+    {
+        name: 'tutorial',
+        type: 'input',
+        message: 'Place links to tutorials here:',
+        when:({ tutorialConfirm }) =>
+        {
+           if(tutorialConfirm)
+           {
+               return true;
+           }
+           else
+           {
+            return false;
+           }
+        }
+    },*/
+    {
+        name: 'license',
+        type: 'list',
+        messages: 'If you used a license please pick one of the options below. (Press <space> to select, enter to select none)',
+        choices: ['MIT', 'GNU', 'Mozilla', 'Apache', 'Boost', 'None used.'],
     }
   
 ];
 
 
-
 // TODO: Create a function to write README file
-//had to add error parameter because callback error kept being called in terminal
-//fs.writefile needs three parameters according to node.js doc 
 function writeToFile(fileName, data, error) {
     fs.writeFile(fileName,data, error);
 }
