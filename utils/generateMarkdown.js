@@ -30,7 +30,7 @@ function renderLicenseLink(license) {
     case 'GNU':
       return '(https://www.gnu.org/licenses/gpl-3.0.txt)';
     case 'Mozilla':
-      return 'https://www.mozilla.org/en-US/MPL/2.0/';
+      return '(https://www.mozilla.org/en-US/MPL/2.0/)';
     case 'Apache':
       return '(https://www.apache.org/licenses/LICENSE-2.0.txt)';
     case 'Boost':
@@ -64,9 +64,10 @@ function creditTitle(credit)
 function gitUsers(gitName)
 {
   if(gitName){
-  gitName=gitName.map(users => `[${users}](https://github.com/${users})<br>`);
+  var gitUser = gitName.split(',');
+  gitUser = gitUser.map(users => `[${users}](https://github.com/${users})<br>`);
  
-  return gitName.join("");
+  return gitUser.join("");
   }
   else 
   {
@@ -79,11 +80,11 @@ function tutorials(tutorialTitle, tutorialLinks)
 {
   if(tutorialLinks)
   {
-    var aboutTutorialArray = tutorialTitle;
-    var links = tutorialLinks;
+    var aboutTutorialArray = tutorialTitle.split(',');
+    var links = tutorialLinks.split(',');
 
-    var newArray = aboutTutorialArray.map((about, index)=>  `${about}:` + ' ' + `[(${links[index]})]`)
-    return newArray;
+    var newArray = aboutTutorialArray.map((about, index)=>  `${about}:` + ' ' + `(${links[index]})<br>`)
+    return newArray.join('');
   }
   else{
     return ' ';
@@ -103,6 +104,10 @@ function tutorials(tutorialTitle, tutorialLinks)
         if(err)
         {
           throw err;
+        }
+        else
+        {
+          return `![alt text](assets/images/enter your image path here)`
         }
       })
       
@@ -126,6 +131,18 @@ function tutorials(tutorialTitle, tutorialLinks)
    }
    else {return ' '}
  }
+ //function if user was communication instructions added
+ function contactInstructions(instructions)
+ {
+   if(instructions)
+   {
+     return '<br>'+ instructions +'<br>';
+   }
+   else
+   {
+     return ' ';
+   }
+ }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
@@ -148,19 +165,21 @@ addScreenshot(data.appScreenshot);
   ${data.installation}
 
   ## Usage
+  ${addScreenshot(data.appScreenshot)}
   ${data.usage}
 
   ${creditTitle(data.credit)}
-  ${gitUsers(data.credit.split(','))}
-  ${tutorials(data.aboutTutorial.split(','), data.tutorial.split(','))}
+  ${gitUsers(data.credit)}
+  ${tutorials(data.aboutTutorial, data.tutorial)}
 
   ${renderLicenseSection(data.license)}
   ${renderLicenseBadge(data.license)}${renderLicenseLink(data.license)}
  
   ## Questions
-  [${data.questions}](https://github.com/${data.questions})
-  ${data.email}
-  ${data.instructions}
+  Github account: [${data.questions}](https://github.com/${data.questions})
+  ${contactInstructions(data.instructions)}
+  ${contactInstructions(data.email)}
+
 `;
 }
 
