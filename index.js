@@ -50,8 +50,7 @@ const questions = [
     //placing a conditional to add screenshot
     {
         name: 'appPhoto',
-        type: 'input',
-        message:'Please place the path for your photo here: ',
+        message:'Assets folder will be created. Remember to upload your screenshot. Press Enter to Continue.',
         when:({ appScreenshot }) => 
         {
             if(appScreenshot)
@@ -71,7 +70,7 @@ const questions = [
     {
         name: 'credit',
         type: 'input',
-        message: 'Please enter github usernames affiliated with the project here:',
+        message: 'Please enter github usernames affiliated with the project here (separate by a comma):',
         when:({ creditConfirm }) =>
         {
            if(creditConfirm)
@@ -88,11 +87,11 @@ const questions = [
         name: 'tutorialConfirm',
         type: 'confirm',
         message: 'Did you follow any tutorials?'
-    },/*
+    },
     {
-        name: 'tutorial',
+        name: 'aboutTutorial',
         type: 'input',
-        message: 'Place links to tutorials here:',
+        message: 'Place tutorial titles and author (separate by comma):',
         when:({ tutorialConfirm }) =>
         {
            if(tutorialConfirm)
@@ -104,12 +103,71 @@ const questions = [
             return false;
            }
         }
-    },*/
+    },
+    {
+        name: 'tutorial',
+        type: 'input',
+        message: 'Place links to tutorials here (separate by a comma in the order of titles and author entered previously): ',
+        when:({ tutorialConfirm }) =>
+        {
+           if(tutorialConfirm)
+           {
+               return true;
+           }
+           else
+           {
+            return false;
+           }
+        }
+    },
     {
         name: 'license',
         type: 'list',
-        messages: 'If you used a license please pick one of the options below. (Press <space> to select, enter to select none)',
+        message: 'If you used a license please pick one of the options below. (Press <space> to select, enter to select none)',
         choices: ['MIT', 'GNU', 'Mozilla', 'Apache', 'Boost', 'None used.'],
+    },
+    {
+        name: 'questions',
+        type:'input',
+        message: 'Enter your github username: (required)',
+        validate: validateInput
+    },
+    {
+        name: 'contactConfirm',
+        type: 'confirm',
+        message: 'Would you like to enter ways in which to contact you in regards to the project?: '
+    },
+    {
+        name: 'email',
+        type: 'input',
+        message: 'Enter your email: ',
+        when:({ contactConfirm }) =>
+        {
+            if(contactConfirm)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    },
+    {
+        name: 'instructions',
+        type: 'input',
+        message: 'Enter instructions on how to contact you if there are additional questions: ',
+        when:({ contactConfirm }) =>
+        {
+            if(contactConfirm)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
   
 ];

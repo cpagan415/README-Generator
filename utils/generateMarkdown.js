@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 
 module.exports = generateMarkdown;
 //Added more functions below to only make sections appear if user wants the section placed 
@@ -53,7 +55,7 @@ function renderLicenseSection(license)
   }
 }
 
-//turned inquirer credit and tutorial input for user into an array
+//These are optional sections and will appear if user wants to add them
 function creditTitle(credit)
 {
   if(credit){  return '## Credits<br>'}
@@ -62,50 +64,103 @@ function creditTitle(credit)
 function gitUsers(gitName)
 {
   if(gitName){
-  gitName=gitName.split(' ');
   gitName=gitName.map(users => `[${users}](https://github.com/${users})<br>`);
-  gitName.join(' ');
-  return gitName;
+ 
+  return gitName.join("");
   }
-  else
+  else 
   {
     return ' ';
   }
 }
 
-function tutorials(tutorialName, tutorialLinks)
+//reference how to combine two arrays on stack overflow, wanted to give the user an option to list tutorial links with information
+function tutorials(tutorialTitle, tutorialLinks)
 {
- 
+  if(tutorialLinks)
+  {
+    var aboutTutorialArray = tutorialTitle;
+    var links = tutorialLinks;
+
+    var newArray = aboutTutorialArray.map((about, index)=>  `${about}:` + ' ' + `[(${links[index]})]`)
+    return newArray;
+  }
+  else{
+    return ' ';
+  }
 }
+
+  //function to add screenshot 
+  function addScreenshot(screenshot)
+  {
+    //adding directories so the user can upload a screenshot
+    //used https://attacomsian.com/blog/nodejs-create-directory#:~:text=In%20a%20Node.,directory%20at%20the%20given%20location as a reference
+    //based on the reference, 'recursive' would allow me to create parent directories such as assets in this instance
+    var photoDir = "./assets/images";
+    if(screenshot)
+    {
+      fs.mkdir(photoDir, { recursive: true}, (err) =>{
+        if(err)
+        {
+          throw err;
+        }
+      })
+      
+    }
+  };
+ //generate table of Contacts for option categories such as credit and license
+ function optionalSectionCredit(credit)
+ {
+   if(credit)
+   {
+     return '* [Credit](#Credit)'
+   }
+   else {return ' '}
+ }
+
+ function optionalSectionLicense(license)
+ {
+   if(license)
+   {
+     return '* [License](#License)'
+   }
+   else {return ' '}
+ }
+
 // TODO: Create a function to generate markdown for README
-//figuring out how to add an image to Usage
 function generateMarkdown(data) {
+
+addScreenshot(data.appScreenshot);
 
   return `# ${data.title}
 
   ## Description
   ${data.description}
 
+  ## Table of Contacts
+  * [Installation](#installation)
+  * [Usage](#usage)
+  ${optionalSectionCredit(data.credit)}
+  ${optionalSectionLicense(data.license)}
+  * [Questions](#Questions)
+
   ## Installation
   ${data.installation}
 
   ## Usage
-  ![alt text](${data.appPhoto})
   ${data.usage}
 
   ${creditTitle(data.credit)}
-  ${gitUsers(data.credit)}
+  ${gitUsers(data.credit.split(','))}
+  ${tutorials(data.aboutTutorial.split(','), data.tutorial.split(','))}
 
   ${renderLicenseSection(data.license)}
   ${renderLicenseBadge(data.license)}${renderLicenseLink(data.license)}
-  
-
-  ## Badges
-
-  ## Features
-
-  ## Contributors
  
+  ## Questions
+  [${data.questions}](https://github.com/${data.questions})
+  ${data.email}
+  ${data.instructions}
 `;
 }
 
