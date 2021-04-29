@@ -7,7 +7,7 @@
 This application generates a ReadMe file for GitHub.
 
 This was done by using Node Inquirer through prompts. 
-Once Initiated through the command line, the user will have to follow the directions in order to generate a ReadMe file. 
+Once Initiated in the command line by typing 'node index', the user will have to follow the directions in order to generate a ReadMe file. 
 
 ## Usage
 
